@@ -1,0 +1,10 @@
+[
+    {
+        "name": "clang++",
+        "toolchainFile": "PATH_TO_VCPKG/scripts/buildsystems/vcpkg.cmake",
+        "compilers": {
+            "C": "clang",
+            "CXX": "clang++"
+        }
+    }
+]

@@ -1,0 +1,20 @@
+{
+    "C_Cpp.autocomplete": "disabled",
+    "C_Cpp.errorSquiggles": "disabled",
+    "C_Cpp.formatting": "disabled",
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "clangd.arguments": [
+        "--clang-tidy",
+        "--pch-storage=memory",
+        "--header-insertion=never"
+    ],
+    "cmake.preferredGenerators": [
+        "Ninja Multi-Config",
+        "Ninja",
+        "Unix Makefiles"
+    ],
+    "editor.inlayHints.enabled": "off",
+    "files.associations": {
+        "*.cu": "cpp"
+    }
+}

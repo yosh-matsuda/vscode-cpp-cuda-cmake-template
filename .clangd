@@ -1,0 +1,8 @@
+CompileFlags:
+  Add:
+    - -nocudalib
+    - --no-cuda-version-check
+  Remove:
+    - -forward-unknown-to-host-compiler
+    - --generate-code*
+    - -rdc=*

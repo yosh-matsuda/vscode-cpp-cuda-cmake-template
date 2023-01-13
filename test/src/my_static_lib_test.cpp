@@ -1,4 +1,4 @@
-﻿#include <gtest/gtest.h>
+#include <gtest/gtest.h>
 #include <my_static_lib.h>
 
 TEST(MyStaticLib, StandardOutput)

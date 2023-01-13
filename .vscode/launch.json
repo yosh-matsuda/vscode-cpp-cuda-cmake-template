@@ -9,12 +9,7 @@
             "cwd": "${workspaceFolder}",
             "args": [],
             "stopAtEntry": false,
-            "environment": [
-                {
-                    "name": "ASAN_OPTIONS",
-                    "value": "detect_leaks=0"
-                }
-            ],
+            "environment": [],
             "externalConsole": false,
             "setupCommands": [
                 {

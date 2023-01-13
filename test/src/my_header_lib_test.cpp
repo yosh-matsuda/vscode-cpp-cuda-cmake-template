@@ -1,4 +1,4 @@
-﻿#include <gtest/gtest.h>
+#include <gtest/gtest.h>
 #include <my_header_lib.h>
 
 TEST(MyHeaderLib, StandardOutput)

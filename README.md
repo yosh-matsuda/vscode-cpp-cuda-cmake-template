@@ -1,123 +1,107 @@
 # CMake C++/CUDA multi-platform template for Visual Studio Code
 
-This CMake C++ project includes typical templates for
+This CMake project contains the following directories and files:
 
-*   C++ header only library: `./my_header_lib`.
-*   C++ static library: `./my_static_lib`.
-*   Executable: `./main`.
-*   [Google Test](https://github.com/google/googletest): `./test`.
-*   (option) CUDA executable: `./cuda/cuda_main`.
-*   (option) CUDA static library: `./cuda/my_cuda_lib`.
+*   `my_header_lib`: C++ header-only library
+*   `my_static_lib`: C++ static library
+*   `main`: Executable
+*   `test`: Test with [Google Test](https://github.com/google/googletest)
+*   `cuda/cuda_main`: (option) CUDA executable
+*   `cuda/my_cuda_lib`: (option) CUDA static library
 
-The pre-configured linter and formatter settings are included. They are based on the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html).
+The preconfigured linter and formatter settings based on the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) are included.
 
-*   [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html): `./.clang-format`
-*   [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/): `./.clang-tidy`
+*   `.clang-format`: [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html)
+*   `.clang-tidy`: [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/)
 
-The following VSCode extensions are prerequisites:
+The [vcpkg](https://github.com/microsoft/vcpkg) is included as a submodule:
+
+*   `vcpkg.json`: List of dependencies
+
+## Prerequisites
+
+VSCode extensions:
 
 *   [clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd).
 *   [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).
 *   [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
 
-## Set up C++ development environment (for Linux)
+## Setting up C++ environment
 
-### Compilers
+### Linux
 
-Install the C++ compiler of your choice. GCC-12 and Clang-14 can be installed with apt on Ubuntu 22.04 or later.
+**Using apt**
+
+For Ubuntu 22.04:
 
 ```bash
-$ sudo apt install g++-12 clang-14
+$ sudo apt install build-essential gdb g++-12 clang-14 cmake ninja-build pkg-config
 ```
 
-If you want to keep your compiler to the latest version, you can use [brew](https://brew.sh/).
+**Using homebrew**
+
+For those who want to use the latest version of the compiler:
 
 ```bash
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+$ brew install gcc llvm cmake ninja gdb
 ```
 
-Note that `PATH` must be set after brew installation. For detailed install instructions, please refer to the official documentation. After successful installation, run brew install.
+### MacOS
+
+**Using Apple Clang**
 
 ```bash
-$ brew install gcc llvm
+$ xcode-select –install
 ```
 
-### CMake
-
-There are pre-compiled binaries available via. apt or brew. You can install it either way.
+**Using homebrew**
 
 ```bash
-$ sudo apt install cmake
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+$ brew install gcc llvm cmake ninja gdb
 ```
 
-or
+### Windows
 
-```bash
-$ brew install cmake
-```
+Install [Visual Studio](https://visualstudio.microsoft.com/) (or Build Tools for Visual Studio for command line only) with C++ development workload.
 
-In addition, it is a good idea to install Ninja as well.
-
-```bash
-$ sudo apt install ninja-build
-```
-
-or
-
-```bash
-$ brew install ninja
-```
-
-### [vcpkg](https://github.com/microsoft/vcpkg) and packages
-
-In this project, C++ libraries are assumed to be managed by vcpkg.
-
-Firstly, clone and install vcpkg
-
-```bash
-$ git clone https://github.com/Microsoft/vcpkg.git
-$ cd vcpkg
-$ ./bootstrap-vcpkg.sh
-$ ./vcpkg integrate install
-```
-
-Then, install packages.
-
-```bash
-$ sudo apt install pkg-config  # maybe required by boost
-$ ./vcpkg install boost gtest
-```
-
-### Install other dependencies
+### Other dependencies
 
 To generate `compile_commands.json` with header files, install [compdb](https://github.com/Sarcasm/compdb)
 
 ```bash
-$ pip3 install compdb
+$ python3 -m pip install compdb
 ```
 
-## Open the project template
+> [!NOTE]
+> Currently, compdb does not seem to support Windows.
+
+## Getting started
+
+### Open the project template
 
 1.  Clone this repository with `--recursive` to include submodule.
 2.  Open the project in VSCode.
-3.  Replace keyword `PATH_TO_VCPKG` by **your vcpkg path** in `.vscode`. Press `Ctrl + Shift + F` to open search view and replace. The files `.vscode/c_cpp_properties.json` and `.vscode/cmake-kits.json` will be found.
 4.  Install VSCode extensions
     *   [clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd).
     *   [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).
     *   [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
-5.  If you want to change the compilers from clang to gcc/g++, edit `.vscode/cmake-kits.json`.
 
-## The build and configurations steps
+### Build and run
 
-Follow the steps below to check if the settings are correct.
-
-1.  Select CMake configure on VSCode status bar: e.g. `Debug`
-1.  Select CMake kits on VSCode status bar: e.g. `clang++`
+1.  Select compiler and build type in CMake Tools.
 1.  Press `F7` to configure and build the project.
 1.  Press `F1` and run `clangd: Restart language server` to load `compile_commands.json` and clangd will restart.
 1.  Press `F5` to debug the target executable.
 
-## Start your own project
+### Start your project
 
-Delete unnecessary directories according to the format of the binary file you wish to build.  
-Chage the project names and directories appropriately and add source files to src/include.
+1.  Delete unnecessary directories and `add_subdirectory` in `CMakeLists.txt`.
+1.  Change the project names and directories in `CMakeLists.txt` and `vcpkg.json`.
+1.  Add your dependencies to `CMakeLists.txt` and `vcpkg.json`.
+
+### Update vcpkg
+
+1.  Update vcpkg submodule to the specified commit hash.
+1.  Edit `builtin-baseline` in `vcpkg.json` to the same as above.

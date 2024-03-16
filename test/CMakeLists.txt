@@ -11,14 +11,8 @@ file(
   CONFIGURE_DEPENDS src/*.c*)
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(
-  ${PROJECT_NAME}
-  PRIVATE my_header_lib
-          my_static_lib
-          my_shared_lib
-          GTest::gtest
-          GTest::gtest_main
-          GTest::gmock
-          GTest::gmock_main)
+  ${PROJECT_NAME} PRIVATE my_header_lib my_static_lib my_shared_lib
+                          GTest::gtest GTest::gtest_main)
 
 # add tests
 include(GoogleTest)

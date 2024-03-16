@@ -15,3 +15,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt-header-only)
 # header
 target_include_directories(${PROJECT_NAME}
                            PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+# exports
+if(WIN32)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE MY_SHARED_LIB_BUILD_DLL)
+endif()

@@ -1,8 +1,11 @@
 CompileFlags:
   Add:
-    - -nocudalib
     - --no-cuda-version-check
+    - --cuda-gpu-arch=sm_90
   Remove:
     - -forward-unknown-to-host-compiler
     - --generate-code*
     - -rdc=*
+    - -Xptxas=-v
+    - -Xcompiler=*
+    - -ccbin=*

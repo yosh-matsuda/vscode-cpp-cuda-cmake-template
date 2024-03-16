@@ -168,9 +168,9 @@ if(CMAKE_EXPORT_COMPILE_COMMANDS)
       TARGET gen_compile_commands
       POST_BUILD
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-      COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/compile_commands.json
-              ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json
-      COMMENT "Creating symbolic link")
+      COMMAND
+        ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/compile_commands.json
+        ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
   endif()
 endif()
 

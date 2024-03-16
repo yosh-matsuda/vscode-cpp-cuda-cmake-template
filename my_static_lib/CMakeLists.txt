@@ -10,7 +10,7 @@ add_library(${PROJECT_NAME} STATIC ${STATIC_SOURCE_FILES})
 
 # dependencies
 find_package(fmt 10.0.0 CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} INTERFACE fmt::fmt-header-only)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt-header-only)
 
 # header
 target_include_directories(${PROJECT_NAME}

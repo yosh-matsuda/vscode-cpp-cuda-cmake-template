@@ -16,5 +16,8 @@
     "editor.inlayHints.enabled": "off",
     "files.associations": {
         "*.cu": "cpp"
+    },
+    "cmake.configureSettings": {
+        "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/externals/vcpkg/scripts/buildsystems/vcpkg.cmake",
     }
 }

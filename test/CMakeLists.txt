@@ -15,10 +15,10 @@ target_link_libraries(
   PRIVATE my_header_lib
           my_static_lib
           my_shared_lib
-          GTest::gmock
           GTest::gtest
-          GTest::gmock_main
-          GTest::gtest_main)
+          GTest::gtest_main
+          GTest::gmock
+          GTest::gmock_main)
 
 # add tests
 include(GoogleTest)

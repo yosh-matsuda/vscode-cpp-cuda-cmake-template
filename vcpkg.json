@@ -1,0 +1,10 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+    "name": "cmake-sample-project",
+    "version": "1.0.0",
+    "dependencies": [
+        "fmt",
+        "gtest"
+    ],
+    "builtin-baseline": "fba75d09065fcc76a25dcf386b1d00d33f5175af"
+}

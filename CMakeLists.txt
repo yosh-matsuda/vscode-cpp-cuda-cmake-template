@@ -22,18 +22,21 @@ if(UNIX AND NOT APPLE)
 endif()
 
 # Default CMake variables
-set(CMAKE_BUILD_TYPE Release CACHE STRING
-  "Specifies the build type on single-configuration generators. Defaults to Release."
+set(CMAKE_BUILD_TYPE
+    Release
+    CACHE
+      STRING
+      "Specifies the build type on single-configuration generators. Defaults to Release."
 )
 
 if(UNIX)
   # Prefer clang
   set(CMAKE_C_COMPILER
-    "clang"
-    CACHE STRING "Specifies the C compiler. Defaults to clang")
+      "clang"
+      CACHE STRING "Specifies the C compiler. Defaults to clang")
   set(CMAKE_CXX_COMPILER
-    "clang++"
-    CACHE STRING "Specifies the C++ compiler. Defaults to clang++")
+      "clang++"
+      CACHE STRING "Specifies the C++ compiler. Defaults to clang++")
 endif()
 
 # Default CMake environment variables
@@ -47,13 +50,18 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>/lib)
 
 #
+# PROJECT
+#
+project(cmake_sample_all CXX)
+
+#
 # COMPILER/LINKER FLAGS
 #
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(UNIX)
+if(NOT MSVC)
   # Prefer -g3 to -g
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g3")
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -g3")
@@ -61,17 +69,13 @@ if(UNIX)
   # Show warnings
   if(NOT SUPPRESS_WARNINGS)
     set(CMAKE_CXX_FLAGS
-      "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wcast-align -Wcast-qual -Wdelete-non-virtual-dtor -Wold-style-cast -Woverloaded-virtual -Wpointer-arith -Wfloat-equal -Winit-self -Wredundant-decls -Wconversion -Wsign-promo -Wswitch-default -Wswitch-enum -Wvariadic-macros -Wwrite-strings -Wno-unknown-pragmas"
+        "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wcast-align -Wcast-qual -Wdelete-non-virtual-dtor -Wold-style-cast -Woverloaded-virtual -Wpointer-arith -Wfloat-equal -Winit-self -Wredundant-decls -Wconversion -Wsign-promo -Wswitch-default -Wswitch-enum -Wvariadic-macros -Wwrite-strings -Wno-unknown-pragmas"
     )
 
     if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-      set(CMAKE_CXX_FLAGS
-        "${CMAKE_CXX_FLAGS} -Wshadow"
-      )
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshadow")
     elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
-      set(CMAKE_CXX_FLAGS
-        "${CMAKE_CXX_FLAGS} -Wshadow=local -Wno-pragmas"
-      )
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-pragmas")
     endif()
   endif()
 
@@ -80,20 +84,25 @@ if(UNIX)
     if(STATIC_LINK_LIBGCC)
       add_link_options(-static-libgcc)
     endif()
-
     if(STATIC_LINK_LIBSTDCPP)
       add_link_options(-static-libstdc++)
     endif()
   endif()
 
-else() # WIN32
+  if(APPLE AND "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang") # except AppleClang
+    # Use libc++ instead of libstdc++
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+  endif()
+else() # MSVC
   # Show warnings
   if(SUPPRESS_WARNINGS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w")
   else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
   endif()
+endif()
 
+if(WIN32)
   set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
 
@@ -126,39 +135,40 @@ endif()
 #
 if(CMAKE_EXPORT_COMPILE_COMMANDS)
   add_custom_target(gen_compile_commands ALL
-    COMMENT "Generating compile_commands.json")
+                    COMMENT "Generating compile_commands.json")
+
+  # Remove old file
+  add_custom_command(
+    TARGET gen_compile_commands
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E remove
+            ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
 
   # Generate a compilation database with header files
-  find_program(COMPDB compdb)
+  if(NOT COMPDB)
+    find_program(COMPDB compdb)
+  endif()
 
   if(COMPDB)
     add_custom_command(
       TARGET gen_compile_commands
-      PRE_BUILD
+      POST_BUILD
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
       COMMAND ${COMPDB} list > ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json
       COMMENT "Running compdb")
-
-  elseif(NOT WIN32)
+  else()
     message(AUTHOR_WARNING "'compdb' not found")
 
-    # Create symbolic link instead of compdb
+    # Copy file instead of compdb
     add_custom_command(
       TARGET gen_compile_commands
-      PRE_BUILD
+      POST_BUILD
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-      COMMAND
-      ${CMAKE_COMMAND} -E create_symlink
-      ${CMAKE_BINARY_DIR}/compile_commands.json
-      ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json
+      COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/compile_commands.json
+              ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json
       COMMENT "Creating symbolic link")
   endif()
 endif()
-
-#
-# PROJECT
-#
-project(cmake_sample_all CXX)
 
 #
 # SUBDIRECTORIES

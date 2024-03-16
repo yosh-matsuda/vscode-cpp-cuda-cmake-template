@@ -18,14 +18,6 @@ The [vcpkg](https://github.com/microsoft/vcpkg) is included as a submodule:
 
 *   `vcpkg.json`: List of dependencies
 
-## Prerequisites
-
-VSCode extensions:
-
-*   [clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd).
-*   [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).
-*   [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
-
 ## Setting up C++ environment
 
 ### Linux
@@ -81,12 +73,17 @@ $ python3 -m pip install compdb
 
 ### Open the project template
 
-1.  Clone this repository with `--recursive` to include submodule.
-2.  Open the project in VSCode.
-4.  Install VSCode extensions
+1.  Clone this repository with `--recursive` to include submodule.  
+    ```bash
+    $ git clone --recursive https://github.com/yosh-matsuda/vscode-cpp-cuda-cmake-template.git
+    ```
+1.  Open the project in VSCode.  
+    ```bash
+    $ code vscode-cpp-cuda-cmake-template
+    ```
+1.  Install VSCode extensions
     *   [clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd).
-    *   [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).
-    *   [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
+    *   [C/C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack).
 
 ### Build and run
 
@@ -94,6 +91,13 @@ $ python3 -m pip install compdb
 1.  Press `F7` to configure and build the project.
 1.  Press `F1` and run `clangd: Restart language server` to load `compile_commands.json` and clangd will restart.
 1.  Press `F5` to debug the target executable.
+    *   `(gdb) Launch` for Linux
+    *   `(Windows) Launch` for Windows
+    *   `(lldb) Launch` for MacOS
+        *   You may need to enable Developer mode  
+            ```bash
+            $ sudo DevToolsSecurity -enable
+            ```
 
 ### Start your project
 

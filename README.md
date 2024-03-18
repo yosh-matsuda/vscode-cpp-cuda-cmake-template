@@ -4,6 +4,7 @@ This CMake project contains the following directories and files:
 
 *   `my_header_lib`: C++ header-only library
 *   `my_static_lib`: C++ static library
+*   `my_shared_lib`: C++ shared library
 *   `main`: Executable
 *   `test`: Test with [Google Test](https://github.com/google/googletest)
 *   `cuda/cuda_main`: (option) CUDA executable
@@ -73,7 +74,7 @@ $ python3 -m pip install compdb
 
 ### Open the project template
 
-1.  Clone this repository with `--recursive` to include submodule.  
+1.  Clone this repository with `--recursive` to include submodules.  
     ```bash
     $ git clone --recursive https://github.com/yosh-matsuda/vscode-cpp-cuda-cmake-template.git
     ```
@@ -94,13 +95,18 @@ $ python3 -m pip install compdb
     *   `(gdb) Launch` for Linux
     *   `(Windows) Launch` for Windows
     *   `(lldb) Launch` for MacOS
-        *   You may need to enable Developer mode  
+        *   You may need to enable the Developer mode  
             ```bash
             $ sudo DevToolsSecurity -enable
             ```
 
 ### Start your project
 
+1.  Untrack the `.vscode` directory and commit.  
+    ```bash
+    $ git rm --cached -r .vscode
+    $ git commit -m "Remove VSCode settings"
+    ```
 1.  Delete unnecessary directories and `add_subdirectory` in `CMakeLists.txt`.
 1.  Change the project names and directories in `CMakeLists.txt` and `vcpkg.json`.
 1.  Add your dependencies to `CMakeLists.txt` and `vcpkg.json`.
@@ -108,4 +114,4 @@ $ python3 -m pip install compdb
 ### Update vcpkg
 
 1.  Update vcpkg submodule to the specified commit hash.
-1.  Edit `builtin-baseline` in `vcpkg.json` to the same as above.
+1.  Edit the `builtin-baseline` in `vcpkg.json` to put the same hash as above.

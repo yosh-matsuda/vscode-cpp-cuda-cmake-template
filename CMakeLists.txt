@@ -138,39 +138,34 @@ endif()
 # EXPORT COMPILE COMMANDS
 #
 if(CMAKE_EXPORT_COMPILE_COMMANDS)
-  add_custom_target(gen_compile_commands ALL
-                    COMMENT "Generating compile_commands.json")
-
-  # Remove old file
-  add_custom_command(
-    TARGET gen_compile_commands
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E remove
-            ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
+  add_custom_target(
+    gen_compile_commands ALL
+    COMMAND ${CMAKE_COMMAND} -E touch
+            ${CMAKE_BINARY_DIR}/compile_commands.json # trick to always run
+    DEPENDS ${CMAKE_SOURCE_DIR}/compile_commands.json)
 
   # Generate a compilation database with header files
   if(NOT COMPDB)
     find_program(COMPDB compdb)
   endif()
-
   if(COMPDB)
+    # Run compdb
     add_custom_command(
-      TARGET gen_compile_commands
-      POST_BUILD
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-      COMMAND ${COMPDB} list > ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json
-      COMMENT "Running compdb")
+      OUTPUT ${CMAKE_SOURCE_DIR}/compile_commands.json
+      DEPENDS ${CMAKE_BINARY_DIR}/compile_commands.json
+      COMMAND ${CMAKE_COMMAND} -E remove
+              ${CMAKE_SOURCE_DIR}/compile_commands.json
+      COMMAND ${COMPDB} list > ${CMAKE_SOURCE_DIR}/compile_commands.json)
   else()
     message(AUTHOR_WARNING "'compdb' not found")
 
     # Copy file instead of compdb
     add_custom_command(
-      TARGET gen_compile_commands
-      POST_BUILD
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      OUTPUT ${CMAKE_SOURCE_DIR}/compile_commands.json
+      DEPENDS ${CMAKE_BINARY_DIR}/compile_commands.json
       COMMAND
         ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/compile_commands.json
-        ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
+        ${CMAKE_SOURCE_DIR}/compile_commands.json)
   endif()
 endif()
 

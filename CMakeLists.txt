@@ -31,12 +31,22 @@ set(CMAKE_BUILD_TYPE
 
 if(UNIX)
   # Prefer clang
+  if(NOT CMAKE_C_COMPILER)
+    find_program(CLANG clang)
+    if(CLANG)
   set(CMAKE_C_COMPILER
       "clang"
       CACHE STRING "Specifies the C compiler. Defaults to clang")
+    endif()
+  endif()
+  if(NOT CMAKE_CXX_COMPILER)
+    find_program(CLANGPP clang++)
+    if(CLANGPP)
   set(CMAKE_CXX_COMPILER
       "clang++"
       CACHE STRING "Specifies the C++ compiler. Defaults to clang++")
+    endif()
+  endif()
 endif()
 
 # Default CMake environment variables

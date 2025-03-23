@@ -12,8 +12,8 @@ This CMake project contains the following directories and files:
 
 The preconfigured linter and formatter settings based on the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) are included.
 
-*   `.clang-format`: [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html)
-*   `.clang-tidy`: [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/)
+*   `.clang-format`: [ClangFormat 19](https://clang.llvm.org/docs/ClangFormat.html)
+*   `.clang-tidy`: [Clang-Tidy 19](https://clang.llvm.org/extra/clang-tidy/)
 
 The [vcpkg](https://github.com/microsoft/vcpkg) is included as a submodule:
 
@@ -25,10 +25,18 @@ The [vcpkg](https://github.com/microsoft/vcpkg) is included as a submodule:
 
 **Using apt**
 
-For Ubuntu 22.04:
+For Ubuntu 24.04:
 
 ```bash
-$ sudo apt install build-essential gdb g++-12 clang-14 cmake ninja-build pkg-config
+$ sudo apt install build-essential gdb g++-14 clang-19 clangd-19 cmake ninja-build pkg-config
+```
+
+Add clangd path to the [`.vscode/settings.json`](.vscode/settings.json) file:
+
+```json
+{
+    "clangd.path": "/usr/bin/clangd-19",
+}
 ```
 
 **Using homebrew**
@@ -64,7 +72,8 @@ Install [Visual Studio](https://visualstudio.microsoft.com/) (or Build Tools for
 To generate `compile_commands.json` with header files, install [compdb](https://github.com/Sarcasm/compdb)
 
 ```bash
-$ python3 -m pip install compdb
+$ sudo apt install pipx
+$ pipx install compdb
 ```
 
 > [!NOTE]

@@ -17,7 +17,29 @@
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ]
+            ],
+            "MIMode": "gdb",
+        },
+        {
+            "name": "(ctest-gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${cmake.testWorkingDirectory}",
+            "program": "${cmake.testProgram}",
+            "args": [
+                "${cmake.testArgs}"
+            ],
+            "stopAtEntry": false,
+            "environment": [],
+            "externalConsole": false,
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "MIMode": "gdb",
         },
         {
             "name": "(lldb) Launch",

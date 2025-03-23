@@ -4,8 +4,11 @@ CompileFlags:
     - --cuda-gpu-arch=sm_90
   Remove:
     - -forward-unknown-to-host-compiler
+    - --expt-relaxed-constexpr
     - --generate-code*
     - -rdc=*
     - -Xptxas=-v
     - -Xcompiler=*
     - -ccbin=*
+    - -Xcudafe
+    - --diag_suppress=*

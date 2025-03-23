@@ -12,8 +12,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM
 target_include_directories(${PROJECT_NAME}
                            PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# Add CUDA compiler options
-target_compile_options(${PROJECT_NAME} PRIVATE -lineinfo -use_fast_math
-                                               -Xptxas=-v)
+# Add CUDA compiler options (if needed)
+target_compile_options(${PROJECT_NAME} PRIVATE -use_fast_math -Xptxas=-v)
 set_target_properties(${PROJECT_NAME} PROPERTIES CUDA_SEPARABLE_COMPILATION ON
                                                  CUDA_RESOLVE_DEVICE_SYMBOLS ON)

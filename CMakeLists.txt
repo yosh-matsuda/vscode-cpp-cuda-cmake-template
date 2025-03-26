@@ -62,7 +62,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>/lib)
 #
 # PROJECT
 #
-project(cmake_sample_all CXX)
+project(cmake_sample_all C CXX)
 
 #
 # COMPILER/LINKER FLAGS

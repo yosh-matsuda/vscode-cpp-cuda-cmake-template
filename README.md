@@ -12,8 +12,8 @@ This CMake project contains the following directories and files:
 
 The preconfigured linter and formatter settings based on the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) are included.
 
-*   `.clang-format`: [ClangFormat 19](https://clang.llvm.org/docs/ClangFormat.html)
-*   `.clang-tidy`: [Clang-Tidy 19](https://clang.llvm.org/extra/clang-tidy/)
+*   `.clang-format`: [ClangFormat 20](https://clang.llvm.org/docs/ClangFormat.html)
+*   `.clang-tidy`: [Clang-Tidy 20](https://clang.llvm.org/extra/clang-tidy/)
 
 The [vcpkg](https://github.com/microsoft/vcpkg) is included as a submodule:
 
@@ -28,14 +28,14 @@ The [vcpkg](https://github.com/microsoft/vcpkg) is included as a submodule:
 For Ubuntu 24.04:
 
 ```bash
-$ sudo apt install build-essential gdb g++-14 clang-19 clangd-19 cmake ninja-build pkg-config
+$ sudo apt install build-essential gdb g++-14 clang-20 clangd-20 cmake ninja-build pkg-config
 ```
 
 Add clangd path to the [`.vscode/settings.json`](.vscode/settings.json) file:
 
 ```json
 {
-    "clangd.path": "/usr/bin/clangd-19",
+    "clangd.path": "/usr/bin/clangd-20",
 }
 ```
 

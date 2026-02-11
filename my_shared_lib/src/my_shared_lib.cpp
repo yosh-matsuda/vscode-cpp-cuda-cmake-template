@@ -1,4 +1,4 @@
-#include "my_shared_lib.h"
+#include "my_shared_lib.hpp"
 #include <fmt/core.h>
 #include <string>
 

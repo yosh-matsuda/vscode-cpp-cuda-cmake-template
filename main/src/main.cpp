@@ -1,6 +1,6 @@
-#include <my_header_lib.h>
-#include <my_shared_lib.h>
-#include <my_static_lib.h>
+#include <my_header_lib.hpp>
+#include <my_shared_lib.hpp>
+#include <my_static_lib.hpp>
 
 int main()
 {

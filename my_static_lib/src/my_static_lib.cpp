@@ -1,4 +1,4 @@
-#include "my_static_lib.h"
+#include "my_static_lib.hpp"
 #include <fmt/core.h>
 #include <string>
 

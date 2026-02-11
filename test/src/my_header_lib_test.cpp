@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <my_header_lib.h>
+#include <my_header_lib.hpp>
 
 TEST(MyHeaderLib, StandardOutput)
 {

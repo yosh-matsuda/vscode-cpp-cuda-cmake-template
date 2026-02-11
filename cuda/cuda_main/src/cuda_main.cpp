@@ -1,4 +1,4 @@
-#include "my_cuda_lib.h"
+#include "my_cuda_lib.hpp"
 
 int main()
 {

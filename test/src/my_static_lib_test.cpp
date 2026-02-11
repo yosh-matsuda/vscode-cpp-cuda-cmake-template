@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <my_static_lib.h>
+#include <my_static_lib.hpp>
 
 TEST(MyStaticLib, StandardOutput)
 {

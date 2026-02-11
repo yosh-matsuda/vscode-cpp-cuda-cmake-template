@@ -1,5 +1,5 @@
 #include <cstdio>
-#include "my_cuda_lib.h"
+#include "my_cuda_lib.hpp"
 
 __global__ void CudaLibFuncImpl() { ::printf("Hello my CUDA library\n"); }
 

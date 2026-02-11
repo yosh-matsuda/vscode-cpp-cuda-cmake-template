@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <my_shared_lib.h>
+#include <my_shared_lib.hpp>
 
 TEST(MySharedLib, StandardOutput)
 {

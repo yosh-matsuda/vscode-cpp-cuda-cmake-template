@@ -1,5 +1,5 @@
 ---
-Checks:          '-*,google-*,modernize-*,performance-*,portability-*,readability-*,clang-diagnostic-*,clang-analyzer-*,-modernize-pass-by-value,-modernize-use-trailing-return-type,-google-readability-todo,-google-readability-braces-around-statements,-google-runtime-references,-readability-named-parameter,-readability-braces-around-statements,-readability-redundant-declaration,-readability-function-cognitive-complexity,-readability-qualified-auto,-readability-identifier-length'
+Checks:          '-*,google-*,modernize-*,performance-*,portability-*,readability-*,clang-diagnostic-*,clang-analyzer-*,-modernize-pass-by-value,-modernize-use-trailing-return-type,-google-readability-todo,-google-readability-braces-around-statements,-google-runtime-references,-readability-named-parameter,-readability-braces-around-statements,-readability-redundant-declaration,-readability-function-cognitive-complexity,-readability-qualified-auto,-readability-identifier-length,-portability-avoid-pragma-once'
 WarningsAsErrors: ''
 HeaderFileExtensions:
   - ''
@@ -15,6 +15,7 @@ ImplementationFileExtensions:
 HeaderFilterRegex: '.*'
 ExcludeHeaderFilterRegex: ''
 FormatStyle:     file
+User:            y_matsuda
 CheckOptions:
   google-readability-function-size.BranchThreshold: '4294967295'
   google-readability-function-size.CountMemberInitAsStmt: 'true'
@@ -137,6 +138,7 @@ CheckOptions:
   readability-const-return-type.IgnoreMacros: 'true'
   readability-container-data-pointer.IgnoredContainers: ''
   readability-container-size-empty.ExcludedComparisonTypes: '::std::array'
+  readability-duplicate-include.IgnoredFilesList: ''
   readability-else-after-return.WarnOnConditionVariables: 'true'
   readability-else-after-return.WarnOnUnfixable: 'true'
   readability-enum-initial-value.AllowExplicitSequentialInitialValues: 'true'
@@ -169,7 +171,6 @@ CheckOptions:
   readability-identifier-naming.ClassMemberPrefix: ''
   readability-identifier-naming.ClassMemberSuffix: _
   readability-identifier-naming.ClassMethodCase: lower_case
-  readability-identifier-naming.ClassMethodHungarianPrefix: Off
   readability-identifier-naming.ClassMethodIgnoredRegexp: ''
   readability-identifier-naming.ClassMethodPrefix: ''
   readability-identifier-naming.ClassMethodSuffix: ''
@@ -196,12 +197,10 @@ CheckOptions:
   readability-identifier-naming.ConstantPrefix: ''
   readability-identifier-naming.ConstantSuffix: ''
   readability-identifier-naming.ConstexprFunctionCase: lower_case
-  readability-identifier-naming.ConstexprFunctionHungarianPrefix: Off
   readability-identifier-naming.ConstexprFunctionIgnoredRegexp: ''
   readability-identifier-naming.ConstexprFunctionPrefix: ''
   readability-identifier-naming.ConstexprFunctionSuffix: ''
   readability-identifier-naming.ConstexprMethodCase: lower_case
-  readability-identifier-naming.ConstexprMethodHungarianPrefix: Off
   readability-identifier-naming.ConstexprMethodIgnoredRegexp: ''
   readability-identifier-naming.ConstexprMethodPrefix: ''
   readability-identifier-naming.ConstexprMethodSuffix: ''
@@ -221,7 +220,6 @@ CheckOptions:
   readability-identifier-naming.EnumPrefix: ''
   readability-identifier-naming.EnumSuffix: ''
   readability-identifier-naming.FunctionCase: lower_case
-  readability-identifier-naming.FunctionHungarianPrefix: Off
   readability-identifier-naming.FunctionIgnoredRegexp: ''
   readability-identifier-naming.FunctionPrefix: ''
   readability-identifier-naming.FunctionSuffix: ''
@@ -237,7 +235,6 @@ CheckOptions:
   readability-identifier-naming.GlobalConstantPrefix: ''
   readability-identifier-naming.GlobalConstantSuffix: ''
   readability-identifier-naming.GlobalFunctionCase: lower_case
-  readability-identifier-naming.GlobalFunctionHungarianPrefix: Off
   readability-identifier-naming.GlobalFunctionIgnoredRegexp: ''
   readability-identifier-naming.GlobalFunctionPrefix: ''
   readability-identifier-naming.GlobalFunctionSuffix: ''
@@ -254,7 +251,6 @@ CheckOptions:
   readability-identifier-naming.IgnoreFailedSplit: 'false'
   readability-identifier-naming.IgnoreMainLikeFunctions: 'false'
   readability-identifier-naming.InlineNamespaceCase: lower_case
-  readability-identifier-naming.InlineNamespaceHungarianPrefix: Off
   readability-identifier-naming.InlineNamespaceIgnoredRegexp: ''
   readability-identifier-naming.InlineNamespacePrefix: ''
   readability-identifier-naming.InlineNamespaceSuffix: ''
@@ -284,12 +280,10 @@ CheckOptions:
   readability-identifier-naming.MemberPrefix: ''
   readability-identifier-naming.MemberSuffix: ''
   readability-identifier-naming.MethodCase: lower_case
-  readability-identifier-naming.MethodHungarianPrefix: Off
   readability-identifier-naming.MethodIgnoredRegexp: ''
   readability-identifier-naming.MethodPrefix: ''
   readability-identifier-naming.MethodSuffix: ''
   readability-identifier-naming.NamespaceCase: lower_case
-  readability-identifier-naming.NamespaceHungarianPrefix: Off
   readability-identifier-naming.NamespaceIgnoredRegexp: ''
   readability-identifier-naming.NamespacePrefix: ''
   readability-identifier-naming.NamespaceSuffix: ''
@@ -297,7 +291,6 @@ CheckOptions:
   readability-identifier-naming.ParameterHungarianPrefix: Off
   readability-identifier-naming.ParameterIgnoredRegexp: ''
   readability-identifier-naming.ParameterPackCase: lower_case
-  readability-identifier-naming.ParameterPackHungarianPrefix: Off
   readability-identifier-naming.ParameterPackIgnoredRegexp: ''
   readability-identifier-naming.ParameterPackPrefix: ''
   readability-identifier-naming.ParameterPackSuffix: ''
@@ -314,7 +307,6 @@ CheckOptions:
   readability-identifier-naming.PrivateMemberPrefix: ''
   readability-identifier-naming.PrivateMemberSuffix: _
   readability-identifier-naming.PrivateMethodCase: lower_case
-  readability-identifier-naming.PrivateMethodHungarianPrefix: Off
   readability-identifier-naming.PrivateMethodIgnoredRegexp: ''
   readability-identifier-naming.PrivateMethodPrefix: ''
   readability-identifier-naming.PrivateMethodSuffix: ''
@@ -324,7 +316,6 @@ CheckOptions:
   readability-identifier-naming.ProtectedMemberPrefix: ''
   readability-identifier-naming.ProtectedMemberSuffix: _
   readability-identifier-naming.ProtectedMethodCase: lower_case
-  readability-identifier-naming.ProtectedMethodHungarianPrefix: Off
   readability-identifier-naming.ProtectedMethodIgnoredRegexp: ''
   readability-identifier-naming.ProtectedMethodPrefix: ''
   readability-identifier-naming.ProtectedMethodSuffix: ''
@@ -334,7 +325,6 @@ CheckOptions:
   readability-identifier-naming.PublicMemberPrefix: ''
   readability-identifier-naming.PublicMemberSuffix: ''
   readability-identifier-naming.PublicMethodCase: lower_case
-  readability-identifier-naming.PublicMethodHungarianPrefix: Off
   readability-identifier-naming.PublicMethodIgnoredRegexp: ''
   readability-identifier-naming.PublicMethodPrefix: ''
   readability-identifier-naming.PublicMethodSuffix: ''
@@ -354,27 +344,22 @@ CheckOptions:
   readability-identifier-naming.StructPrefix: ''
   readability-identifier-naming.StructSuffix: ''
   readability-identifier-naming.TemplateParameterCase: CamelCase
-  readability-identifier-naming.TemplateParameterHungarianPrefix: Off
   readability-identifier-naming.TemplateParameterIgnoredRegexp: ''
   readability-identifier-naming.TemplateParameterPrefix: ''
   readability-identifier-naming.TemplateParameterSuffix: ''
   readability-identifier-naming.TemplateTemplateParameterCase: CamelCase
-  readability-identifier-naming.TemplateTemplateParameterHungarianPrefix: Off
   readability-identifier-naming.TemplateTemplateParameterIgnoredRegexp: ''
   readability-identifier-naming.TemplateTemplateParameterPrefix: ''
   readability-identifier-naming.TemplateTemplateParameterSuffix: ''
   readability-identifier-naming.TypeAliasCase: lower_case
-  readability-identifier-naming.TypeAliasHungarianPrefix: Off
   readability-identifier-naming.TypeAliasIgnoredRegexp: ''
   readability-identifier-naming.TypeAliasPrefix: ''
   readability-identifier-naming.TypeAliasSuffix: ''
   readability-identifier-naming.TypeTemplateParameterCase: CamelCase
-  readability-identifier-naming.TypeTemplateParameterHungarianPrefix: Off
   readability-identifier-naming.TypeTemplateParameterIgnoredRegexp: ''
   readability-identifier-naming.TypeTemplateParameterPrefix: ''
   readability-identifier-naming.TypeTemplateParameterSuffix: ''
   readability-identifier-naming.TypedefCase: lower_case
-  readability-identifier-naming.TypedefHungarianPrefix: Off
   readability-identifier-naming.TypedefIgnoredRegexp: ''
   readability-identifier-naming.TypedefPrefix: ''
   readability-identifier-naming.TypedefSuffix: ''
@@ -384,7 +369,6 @@ CheckOptions:
   readability-identifier-naming.UnionPrefix: ''
   readability-identifier-naming.UnionSuffix: ''
   readability-identifier-naming.ValueTemplateParameterCase: CamelCase
-  readability-identifier-naming.ValueTemplateParameterHungarianPrefix: Off
   readability-identifier-naming.ValueTemplateParameterIgnoredRegexp: ''
   readability-identifier-naming.ValueTemplateParameterPrefix: ''
   readability-identifier-naming.ValueTemplateParameterSuffix: ''
@@ -394,7 +378,6 @@ CheckOptions:
   readability-identifier-naming.VariablePrefix: ''
   readability-identifier-naming.VariableSuffix: ''
   readability-identifier-naming.VirtualMethodCase: lower_case
-  readability-identifier-naming.VirtualMethodHungarianPrefix: Off
   readability-identifier-naming.VirtualMethodIgnoredRegexp: ''
   readability-identifier-naming.VirtualMethodPrefix: ''
   readability-identifier-naming.VirtualMethodSuffix: ''
@@ -415,6 +398,7 @@ CheckOptions:
   readability-redundant-casting.IgnoreMacros: 'true'
   readability-redundant-casting.IgnoreTypeAliases: 'false'
   readability-redundant-member-init.IgnoreBaseInCopyConstructors: 'false'
+  readability-redundant-parentheses.AllowedDecls: 'std::max;std::min'
   readability-redundant-smartptr-get.IgnoreMacros: 'true'
   readability-redundant-string-init.StringNames: '::std::basic_string_view;::std::basic_string'
   readability-simplify-boolean-expr.ChainedConditionalAssignment: 'false'
@@ -426,7 +410,7 @@ CheckOptions:
   readability-static-accessed-through-instance.NameSpecifierNestingThreshold: '3'
   readability-string-compare.StringLikeClasses: '::std::basic_string;::std::basic_string_view'
   readability-suspicious-call-argument.Abbreviation: 'true'
-  readability-suspicious-call-argument.Abbreviations: 'lst=list;arr=array;num=number;ptr=pointer;ln=line;val=value;i=index;cpy=copy;idx=index;dest=destination;src=source;wdth=width;nr=number;elem=element;vec=vector;srv=server;pos=position;cl=client;stmt=statement;len=length;buf=buffer;dist=distancedst=distance;hght=height;var=variable;col=column;ref=reference;attr=attribute;str=string;cnt=count;addr=address'
+  readability-suspicious-call-argument.Abbreviations: 'lst=list;arr=array;num=number;ptr=pointer;vec=vector;i=index;ln=line;cpy=copy;idx=index;dest=destination;src=source;wdth=width;nr=number;elem=element;val=value;srv=server;pos=position;cl=client;stmt=statement;len=length;buf=buffer;dist=distancedst=distance;hght=height;var=variable;col=column;ref=reference;attr=attribute;str=string;cnt=count;addr=address'
   readability-suspicious-call-argument.Dice: 'true'
   readability-suspicious-call-argument.DiceDissimilarBelow: '60'
   readability-suspicious-call-argument.DiceSimilarAbove: '70'
